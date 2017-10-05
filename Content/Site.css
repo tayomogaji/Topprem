@@ -1,0 +1,132 @@
+﻿body {
+    padding-left:2px;
+    padding-right:2px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 1px;
+    padding-right: 1px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/*------------------------------------mySheet-------------------------------------*/
+#title {
+    font-family: 'Poppins'800, sans-serif;
+    text-align: left;
+    color: #e9e9e9;
+    font-weight: 200;
+    font-size: 70px;
+    display: block;
+    padding-left:20px;
+}
+.banner {
+background-color:rgb(20, 20, 20);
+color:#e9e9e9;
+padding-top:20px;
+padding: 5px;
+}
+
+.act {
+    background-color: #222222;
+    color: #e9e9e9;
+    padding: 10px 27px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}
+
+.act:hover {
+    background-color: #bebebe;
+    border: none;
+    color: black;
+    padding: 10px 27px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}
+
+.foot {
+    background-color: #222222;
+    color: #e9e9e9;
+    padding: 10px;
+}
+/*------------------------------------Home-----------------------------------------*/
+.filter {
+    background-color: rgb(73, 73, 73);
+    color: #e9e9e9;
+    font-size: 14px;
+    padding: 20px;
+}
+
+.Home {
+    background-image: url('../myImages/bg-home.png');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#table {
+color:#222222;
+font-size:large;
+padding:2px;
+}
+
+/*----------------------------------Add Player------------------------------------------*/
+
+.Add {
+    background-image: url('../myImages/bg-create.png');
+    height:100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/*----------------------------------Overview------------------------------------*/
+
+.Overview {
+    background-image: url('../myImages/bg-detials.png');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/*----------------------------------Edit Player------------------------------------*/
+
+.Edit {
+    background-image: url('../myImages/bg-edit.png');
+    height:100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/*----------------------------------Delete Player------------------------------------*/
+
+.Delete {
+    background-image: url('../myImages/bg-delete.png');
+    height:100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
