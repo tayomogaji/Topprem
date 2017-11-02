@@ -8,13 +8,15 @@ using System.Web.Mvc;
 using XI.Models;
 using Google.GData.Client;
 using Google.GData.YouTube;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 
 namespace XI.Controllers
 {
     public class HomeController : Controller
     {
         //this new private field represents my new data base model i now wish to communicate with.
-        private XIEntities db = new XIEntities();
+        private XIEntities3 db = new XIEntities3();
 
         // GET: Players By searching the Players Team option. 
         public ActionResult Index(string playerTeam, string searchString)
@@ -81,29 +83,48 @@ namespace XI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Img1,Name,Age,Nation," +
-            "Team,Position,Appearances,Img2,Bio,Video")] Player player)
+            "Team,Position,Appearances,Img2,Bio")] Player player)
         {
-            //ensuring the application doesn't crash if nothing is entered by 
-            //seting up a defult image
-            if (player.Img1 == null){
-                player.Img1 = "http://www.silhouette-portrait.com/images/silhouettes05.jpg";
-            }
+                //ensuring the application doesn't crash if nothing is entered by 
+                //seting up defult images
+                if (player.Img1 == null)
+                {
+                    player.Img1 = "http://www.silhouette-portrait.com/images/silhouettes05.jpg";
+                }
 
-            if (player.Img2 == null)
+                if (player.Img2 == null)
+                {
+                    player.Img2 = "https://i.pinimg.com/564x/1e/9e/e5/1e9ee5b20b0ad38152bfb6ceb9eb1120.jpg";
+                }
+
+            //testing for any uncaught validation errors.
+            try
             {
-                player.Img2 = "http://images.clipartpanda.com/girl-soccer-player-silhouette-51xWBqbZ76L._SL1500_.jpg";
-            }
+                //saving changes to database.
+                if (ModelState.IsValid)
+                {
+                    db.Players.Add(player);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            if (ModelState.IsValid) {
-                db.Players.Add(player);
-                db.SaveChanges();
-                return RedirectToAction("Index");
             }
-     
+            //the bug will be traced and displayed in the output page of the debugger.
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Property: {0} Error: {1}",
+                                                validationError.PropertyName,
+                                                validationError.ErrorMessage);
+                    }
+                }
+            }
             return View(player);
         }
-
-
+            
 
         // GET: Home/Edit/5
         public ActionResult Edit(int? Id)
@@ -125,10 +146,10 @@ namespace XI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Img1,Name,Age,Nation," +
-            "Team,Position,Appearances,Img2,Bio,Video")] Player player)
+            "Team,Position,Appearances,Img2,Bio")] Player player)
         {
             //ensuring the application doesn't crash if nothing is entered by 
-            //seting up a defult image
+            //seting up defult images
             if (player.Img1 == null)
             {
                 player.Img1 = "http://www.silhouette-portrait.com/images/silhouettes05.jpg";
@@ -136,18 +157,34 @@ namespace XI.Controllers
 
             if (player.Img2 == null)
             {
-                player.Img2 = "http://images.clipartpanda.com/girl-soccer-player-silhouette-51xWBqbZ76L._SL1500_.jpg";
+                player.Img2 = "https://i.pinimg.com/564x/1e/9e/e5/1e9ee5b20b0ad38152bfb6ceb9eb1120.jpg";
             }
 
-            if (ModelState.IsValid) {
-                db.Entry(player).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+            //testing for any uncaught validation errors.
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Entry(player).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            //the bug will be traced and displayed in the output page of the debugger
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Property: {0} Error: {1}",
+                                                validationError.PropertyName,
+                                                validationError.ErrorMessage);
+                    }
+                }
             }
             return View(player);
         }
-
-
 
         // GET: Home/Delete/5
         public ActionResult Delete(int? Id)
@@ -184,4 +221,3 @@ namespace XI.Controllers
 
     }//Home controller
 }//NameSpace 
-
