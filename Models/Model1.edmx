@@ -19,7 +19,6 @@
           <Property Name="Appearances" Type="int" Nullable="false" />
           <Property Name="Img2" Type="varchar(max)" Nullable="false" />
           <Property Name="Bio" Type="varchar(max)" Nullable="false" />
-          <Property Name="Video" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityContainer Name="XIModelStoreContainer">
           <EntitySet Name="Players" EntityType="Self.Players" Schema="dbo" store:Type="Tables" />
@@ -43,9 +42,8 @@
           <Property Name="Appearances" Type="Int32" Nullable="false" />
           <Property Name="Img2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Bio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Video" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="XIEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="XIEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Players" EntityType="Self.Player" />
         </EntityContainer>
       </Schema>
@@ -53,7 +51,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="XIModelStoreContainer" CdmEntityContainer="XIEntities1">
+        <EntityContainerMapping StorageEntityContainer="XIModelStoreContainer" CdmEntityContainer="XIEntities3">
           <EntitySetMapping Name="Players">
             <EntityTypeMapping TypeName="XIModel.Player">
               <MappingFragment StoreEntitySet="Players">
@@ -67,7 +65,6 @@
                 <ScalarProperty Name="Appearances" ColumnName="Appearances" />
                 <ScalarProperty Name="Img2" ColumnName="Img2" />
                 <ScalarProperty Name="Bio" ColumnName="Bio" />
-                <ScalarProperty Name="Video" ColumnName="Video" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -13,10 +13,10 @@ namespace XI.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class XIEntities : DbContext
+    public partial class XIEntities3 : DbContext
     {
-        public XIEntities()
-            : base("name=XIEntities1")
+        public XIEntities3()
+            : base("name=XIEntities3")
         {
         }
     
