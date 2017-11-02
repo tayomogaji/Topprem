@@ -108,19 +108,10 @@
             <div class="form-group">
                 @Html.Label("Review", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Bio, "", new { htmlAttributes = new { @class = "form-control col-md-6", rows = 10, @placeholder = "Write something about the palyer" } })
+                    @Html.TextAreaFor(model => model.Bio, new { @class = "form-control col-md-6", rows = 10, @placeholder = "Write something about the player" })
                     @Html.ValidationMessageFor(model => model.Bio, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-            @*Create new Videio*@
-            @*<div class="form-group">
-                @Html.Label("Highlights", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Video, "", new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter youtube url" } })
-                    @Html.ValidationMessageFor(model => model.Video, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
 
             @*Submittion button*@
             <div class="form-group">
